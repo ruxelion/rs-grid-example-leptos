@@ -1,0 +1,70 @@
+[package]
+name = "basic-leptos"
+version = "0.1.0"
+edition = "2021"
+
+# Standalone rs-grid example — Leptos 0.8 CSR + Trunk + Tailwind/DaisyUI.
+# The full-featured showcase (themes, i18n, layout persistence).
+# Depends on the rs-grid library via git tag (see README for build steps).
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+rs-grid-core   = { git = "https://github.com/ruxelion/rs-grid", tag = "v0.1.0" }
+rs-grid-scene  = { git = "https://github.com/ruxelion/rs-grid", tag = "v0.1.0" }
+rs-grid-leptos = { git = "https://github.com/ruxelion/rs-grid", tag = "v0.1.0" }
+example-common = { git = "https://github.com/ruxelion/rs-grid", tag = "v0.1.0" }
+leptos = { version = "0.8", features = ["csr"] }
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+console_error_panic_hook = "0.1"
+serde_json = "1"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+  "CanvasRenderingContext2d",
+  "HtmlCanvasElement",
+  "Window",
+  "Document",
+  "HtmlDocument",
+  "Element",
+  "EventTarget",
+  "MouseEvent",
+  "MouseEventInit",
+  "WheelEvent",
+  "DomRect",
+  "ResizeObserver",
+  "ResizeObserverEntry",
+  "ResizeObserverSize",
+  "Performance",
+  "Request",
+  "RequestInit",
+  "RequestMode",
+  "Response",
+  "KeyboardEvent",
+  "Navigator",
+  "Clipboard",
+  "HtmlTextAreaElement",
+  "HtmlBodyElement",
+  "console",
+  "ClipboardEvent",
+  "DataTransfer",
+  "CssStyleDeclaration",
+  "HtmlElement",
+  "HtmlImageElement",
+  "AddEventListenerOptions",
+  "Node",
+  "HtmlAnchorElement",
+  "HtmlInputElement",
+  "HtmlSelectElement",
+  "HtmlOptionElement",
+  "UiEvent",
+  "FocusEvent",
+  "FileList",
+  "File",
+  "FileReader",
+  "Storage",
+  "TextMetrics",
+]
