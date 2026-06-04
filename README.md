@@ -1,7 +1,7 @@
 # rs-grid-example-leptos
 
 The full-featured showcase of [rs-grid](https://github.com/ruxelion/rs-grid)
-with **Leptos 0.8 (CSR)**, [Trunk](https://trunkrs.dev) and Tailwind/DaisyUI:
+with **Leptos 0.8 (CSR)**, [Trunk](https://github.com/trunk-rs/trunk) and Tailwind/DaisyUI:
 dataset-size / column-count / theme / language selectors, editable & selectable
 toggles, and column-layout persistence.
 
