@@ -377,7 +377,7 @@ dependencies = [
 [[package]]
 name = "example-common"
 version = "0.1.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#0a2776b18774d0c5045db062e5589198a97ac912"
+source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#f792d0ea4679ba256b8fcf5a15d5314f9945582a"
 dependencies = [
  "rs-grid-core",
  "rs-grid-icons",
@@ -1233,17 +1233,17 @@ checksum = "dc897dd8d9e8bd1ed8cdad82b5966c3e0ecae09fb1907d58efaa013543185d0a"
 [[package]]
 name = "rs-grid-core"
 version = "0.1.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#0a2776b18774d0c5045db062e5589198a97ac912"
+source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#f792d0ea4679ba256b8fcf5a15d5314f9945582a"
 
 [[package]]
 name = "rs-grid-icons"
 version = "0.1.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#0a2776b18774d0c5045db062e5589198a97ac912"
+source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#f792d0ea4679ba256b8fcf5a15d5314f9945582a"
 
 [[package]]
 name = "rs-grid-leptos"
 version = "0.1.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#0a2776b18774d0c5045db062e5589198a97ac912"
+source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#f792d0ea4679ba256b8fcf5a15d5314f9945582a"
 dependencies = [
  "leptos",
  "rs-grid-core",
@@ -1257,7 +1257,7 @@ dependencies = [
 [[package]]
 name = "rs-grid-render-canvas"
 version = "0.1.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#0a2776b18774d0c5045db062e5589198a97ac912"
+source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#f792d0ea4679ba256b8fcf5a15d5314f9945582a"
 dependencies = [
  "js-sys",
  "rs-grid-scene",
@@ -1268,7 +1268,7 @@ dependencies = [
 [[package]]
 name = "rs-grid-scene"
 version = "0.1.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#0a2776b18774d0c5045db062e5589198a97ac912"
+source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#f792d0ea4679ba256b8fcf5a15d5314f9945582a"
 dependencies = [
  "rs-grid-core",
 ]
@@ -1276,7 +1276,7 @@ dependencies = [
 [[package]]
 name = "rs-grid-web"
 version = "0.1.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#0a2776b18774d0c5045db062e5589198a97ac912"
+source = "git+https://github.com/ruxelion/rs-grid?tag=v0.1.0#f792d0ea4679ba256b8fcf5a15d5314f9945582a"
 dependencies = [
  "js-sys",
  "rs-grid-core",
