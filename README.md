@@ -5,7 +5,7 @@ with **Leptos 0.8 (CSR)**, [Trunk](https://github.com/trunk-rs/trunk) and Tailwi
 dataset-size / column-count / theme / language selectors, editable & selectable
 toggles, and column-layout persistence.
 
-This example pins the library at a released tag (`v0.1.0`) via a git
+This example pins the library at a released tag (`rs-grid-core-v0.1.3`) via a git
 dependency — see [`Cargo.toml`](Cargo.toml).
 
 ## Prerequisites
