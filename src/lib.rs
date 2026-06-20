@@ -1,20 +1,17 @@
 //! Demo application showcasing rs-grid with Leptos CSR.
 
-use std::{cell::RefCell, collections::HashMap, rc::Rc};
+use std::{cell::RefCell, rc::Rc};
 
 use example_common::{
     build_model, class_map::resolve_classes, fmt_cols, fmt_rows,
+    layout::LayoutSnapshot,
 };
 use leptos::prelude::*;
-use rs_grid_core::{column::ColumnOffsets, model::GridModel};
 use rs_grid_leptos::{theme_from_css_vars, GridCanvas, Locale, WebGridCanvas};
 use rs_grid_scene::Theme;
 use wasm_bindgen::prelude::*;
 
 const LS_KEY: &str = "rs-grid-basic-layout";
-
-/// `(widths_by_key, order_by_key, pinned_count)`
-type PersistedLayout = (Vec<(String, f64)>, Vec<String>, usize);
 
 // Thread-local canvas ref — avoids Send requirements.
 // WASM is single-threaded so this is always safe.
@@ -283,8 +280,8 @@ fn App() -> impl IntoView {
                     {move || {
                         let mut model =
                             build_model(row_count.get(), col_count.get());
-                        if let Some(layout) = load_layout() {
-                            apply_layout(&mut model, &layout);
+                        if let Some(snapshot) = load_layout() {
+                            snapshot.apply(&mut model);
                         }
 
                         let on_mount_cb =
@@ -354,16 +351,17 @@ pub fn main() {
 // ── column-layout persistence (localStorage)
 // ──────────────────────────────────
 
-fn load_layout() -> Option<PersistedLayout> {
+fn load_layout() -> Option<LayoutSnapshot> {
     let ls = web_sys::window()?.local_storage().ok().flatten()?;
     let raw = ls.get_item(LS_KEY).ok().flatten()?;
-    serde_json::from_str(&raw).ok()
+    LayoutSnapshot::from_json(&raw)
 }
 
 fn save_layout(gc: &WebGridCanvas) {
-    let payload: PersistedLayout =
-        (gc.column_widths(), gc.column_order(), gc.pinned_count());
-    let Ok(json) = serde_json::to_string(&payload) else {
+    let Some(json) =
+        LayoutSnapshot::new(gc.column_widths(), gc.column_order(), gc.pinned_count())
+            .to_json()
+    else {
         return;
     };
     let Some(ls) =
@@ -372,31 +370,4 @@ fn save_layout(gc: &WebGridCanvas) {
         return;
     };
     let _ = ls.set_item(LS_KEY, &json);
-}
-
-fn apply_layout(model: &mut GridModel, layout: &PersistedLayout) {
-    let (widths, order, pinned) = layout;
-
-    let width_map: HashMap<&str, f64> =
-        widths.iter().map(|(k, w)| (k.as_str(), *w)).collect();
-    for col in model.columns.iter_mut() {
-        if let Some(w) = width_map.get(col.key.as_str()) {
-            col.width = *w;
-        }
-    }
-
-    let order_idx: HashMap<&str, usize> = order
-        .iter()
-        .enumerate()
-        .map(|(i, k)| (k.as_str(), i))
-        .collect();
-    model.columns.sort_by_key(|c| {
-        order_idx.get(c.key.as_str()).copied().unwrap_or(usize::MAX)
-    });
-
-    model.pinned_count = (*pinned).min(model.columns.len());
-
-    // Hit-testing reads `column_offsets`; keep it in sync after mutating
-    // widths and reordering.
-    model.column_offsets = ColumnOffsets::compute(&model.columns);
 }

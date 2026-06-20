@@ -19,7 +19,6 @@ leptos = { version = "0.8", features = ["csr"] }
 wasm-bindgen = "0.2"
 js-sys = "0.3"
 console_error_panic_hook = "0.1"
-serde_json = "1"
 
 [dependencies.web-sys]
 version = "0.3"
@@ -68,3 +67,12 @@ features = [
   "Storage",
   "TextMetrics",
 ]
+
+# TEMPORARY (Phase B dev): build against the local rs-grid working tree so the
+# demo can use unreleased API (example_common::layout, rs_grid_web::storage).
+# Remove this block and bump the git `tag` once the new rs-grid version ships.
+[patch."https://github.com/ruxelion/rs-grid"]
+rs-grid-core   = { path = "../rs-grid/crates/rs-grid-core" }
+rs-grid-scene  = { path = "../rs-grid/crates/rs-grid-scene" }
+rs-grid-leptos = { path = "../rs-grid/crates/rs-grid-leptos" }
+example-common = { path = "../rs-grid/examples/example-common" }
