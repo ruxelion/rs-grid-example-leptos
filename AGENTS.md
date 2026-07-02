@@ -44,6 +44,14 @@ cd e2e && npm test                 # run
 cd e2e && npm run update-snapshots # regenerate visual baselines
 ```
 
+CI (`.github/workflows/ci.yml`, `e2e` job) runs this automatically on every
+push/PR, but scoped to `tests/grid.spec.ts` only and with
+`--update-snapshots --grep-invert "visual regression|colonnes pinnées|
+précision f64"` — `editing.spec.ts` / `csp.spec.ts` / `leptos-component.spec.ts`
+aren't yet verified stable on a Linux runner, and screenshots always write
+fresh rather than diff against a baseline (see Conventions below: no visual
+baselines are committed here).
+
 ## Conventions
 
 - `themes/` is **vendored** from the rs-grid reference theme — re-vendor rather than hand-edit.
@@ -55,8 +63,11 @@ cd e2e && npm run update-snapshots # regenerate visual baselines
   nightly-only config) — intentional, so this demo never requires a nightly toolchain.
 - No `unwrap()` in production code — use `expect("reason")` or error propagation.
 - English (US) only in code, comments, and strings.
-- In `e2e/`, `node_modules/` and `test-results/` are gitignored; `tests/snapshots/`
-  (visual baselines) are committed.
+- In `e2e/`, `node_modules/` and `test-results/` are gitignored. Unlike its 3
+  sibling examples, `tests/snapshots/` is **also gitignored here** (root
+  `.gitignore`) — no visual baselines are committed, so CI and local runs
+  always regenerate them fresh (`--update-snapshots`) rather than diffing
+  against a reference image.
 
 ## Public surface (keep in sync with `README.md`)
 
