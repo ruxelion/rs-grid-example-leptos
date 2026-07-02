@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Least privilege: PR jobs compile untrusted fork code, so the default token
+# must not be able to write to the repo.
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Format & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: cargo fmt
+        run: cargo fmt --all -- --check
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Install trunk
+        run: cargo install trunk --locked
+
+      # Trunk's pre_build hook (scripts/build-css.mjs) installs node_modules
+      # and compiles Tailwind before the WASM build.
+      - name: trunk build
+        run: trunk build

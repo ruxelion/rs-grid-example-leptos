@@ -18,8 +18,12 @@ each build. `input.css` is the Tailwind entry (`@import "tailwindcss"; @plugin "
 
 ## Critical: this repo does NOT contain the library
 
-`rs-grid-*` and `example-common` are **git dependencies pinned to a tag** (currently
-`rs-grid-core-v0.1.3`, see [`Cargo.toml`](Cargo.toml)):
+<!-- keep in sync with rs-grid/AGENTS.md "How they relate" + the other 3
+     rs-grid-example-*/AGENTS.md "Critical" sections -->
+
+`rs-grid-*` and `example-common` are **git dependencies pinned to a tag** — see
+the `tag =` value in [`Cargo.toml`](Cargo.toml) for the current pin (do not
+hardcode a version/tag name in prose here, it goes stale):
 
 - The library source is in the separate `rs-grid` repo. Editing files here changes only
   the demo wiring in `src/lib.rs` — never grid behaviour.
@@ -27,10 +31,37 @@ each build. `input.css` is the Tailwind entry (`@import "tailwindcss"; @plugin "
   (`example-common` must match the library it was built against).
 - To adopt a new library version: bump the tag on all four deps together, then `cargo update`.
 
+## End-to-end tests (Playwright)
+
+A functional + visual-regression suite ([`e2e/`](e2e/)) covers every parity feature
+(selectors, toggles, persistence, canvas interaction).
+
+```sh
+cd e2e && npm install              # first time
+npx playwright install chromium    # first time
+cd .. && trunk build               # build dist/ first
+cd e2e && npm test                 # run
+cd e2e && npm run update-snapshots # regenerate visual baselines
+```
+
 ## Conventions
 
 - `themes/` is **vendored** from the rs-grid reference theme — re-vendor rather than hand-edit.
 - `generated/` is build output — never hand-edit.
-- Rust files are auto-formatted on save (PostToolUse `rustfmt` hook). No clippy hook: this
-  is a `cdylib` + `wasm-bindgen` crate, so host-target clippy does not apply.
-- This example also has its own Playwright `e2e/` suite.
+- Rust files are auto-formatted on save (PostToolUse `rustfmt` hook, then a blocking
+  `cargo check --target wasm32-unknown-unknown`). No clippy hook: this is a `cdylib` +
+  `wasm-bindgen` crate, so host-target clippy does not apply.
+- Formatting uses stable `rustfmt` defaults (no `rustfmt.toml` here, unlike `rs-grid`'s
+  nightly-only config) — intentional, so this demo never requires a nightly toolchain.
+- No `unwrap()` in production code — use `expect("reason")` or error propagation.
+- English (US) only in code, comments, and strings.
+- In `e2e/`, `node_modules/` and `test-results/` are gitignored; `tests/snapshots/`
+  (visual baselines) are committed.
+
+## Public surface (keep in sync with `README.md`)
+
+The selectors/toggles wired to `rs_grid_leptos::GridCanvas` in
+[`src/lib.rs`](src/lib.rs) (dataset size, column count, theme, language,
+editable/selectable, layout persistence) are this demo's public-facing
+contract. If you add, remove, or rename one, update `README.md`'s feature
+list in the same commit.
