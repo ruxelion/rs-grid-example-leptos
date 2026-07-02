@@ -16,6 +16,16 @@ A Trunk `pre_build` hook ([`scripts/build-css.mjs`](scripts/build-css.mjs)) runs
 `npm install` (first time) then compiles Tailwind v4 to `generated/tailwind.css` before
 each build. `input.css` is the Tailwind entry (`@import "tailwindcss"; @plugin "daisyui"`).
 
+## Before coding
+
+<!-- keep in sync with the "Before coding" section in every other repo's AGENTS.md -->
+**Plan before coding non-trivial changes.** For a bug fix or feature that
+touches more than one file, changes a public API/component contract, or
+isn't an obvious one-liner, propose a short plan (approach, files touched,
+trade-offs) before writing code — use Claude Code's Plan Mode rather than
+diving straight into edits. Skip this for trivial fixes; planning every
+one-line change only adds friction.
+
 ## Critical: this repo does NOT contain the library
 
 <!-- keep in sync with rs-grid/AGENTS.md "How they relate" + the other 3
