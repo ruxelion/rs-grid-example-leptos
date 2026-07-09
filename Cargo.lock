@@ -370,7 +370,7 @@ dependencies = [
 [[package]]
 name = "example-common"
 version = "0.1.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.3#c6c86b8e57cc6bf8059923af03c4984816c855ff"
+source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.4#d8fbfad2d8781594602034b0e3d5df5e0022170c"
 dependencies = [
  "rs-grid-core",
  "rs-grid-icons",
@@ -1180,17 +1180,17 @@ checksum = "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
 [[package]]
 name = "rs-grid-core"
 version = "0.4.0"
-source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.3#c6c86b8e57cc6bf8059923af03c4984816c855ff"
+source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.4#d8fbfad2d8781594602034b0e3d5df5e0022170c"
 
 [[package]]
 name = "rs-grid-icons"
 version = "0.1.2"
-source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.3#c6c86b8e57cc6bf8059923af03c4984816c855ff"
+source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.4#d8fbfad2d8781594602034b0e3d5df5e0022170c"
 
 [[package]]
 name = "rs-grid-leptos"
 version = "0.3.3"
-source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.3#c6c86b8e57cc6bf8059923af03c4984816c855ff"
+source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.4#d8fbfad2d8781594602034b0e3d5df5e0022170c"
 dependencies = [
  "leptos",
  "rs-grid-core",
@@ -1204,7 +1204,7 @@ dependencies = [
 [[package]]
 name = "rs-grid-render-canvas"
 version = "0.1.15"
-source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.3#c6c86b8e57cc6bf8059923af03c4984816c855ff"
+source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.4#d8fbfad2d8781594602034b0e3d5df5e0022170c"
 dependencies = [
  "js-sys",
  "rs-grid-scene",
@@ -1215,7 +1215,7 @@ dependencies = [
 [[package]]
 name = "rs-grid-scene"
 version = "0.2.8"
-source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.3#c6c86b8e57cc6bf8059923af03c4984816c855ff"
+source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.4#d8fbfad2d8781594602034b0e3d5df5e0022170c"
 dependencies = [
  "rs-grid-core",
 ]
@@ -1223,7 +1223,7 @@ dependencies = [
 [[package]]
 name = "rs-grid-web"
 version = "0.1.16"
-source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.3#c6c86b8e57cc6bf8059923af03c4984816c855ff"
+source = "git+https://github.com/ruxelion/rs-grid?tag=rs-grid-leptos-v0.3.4#d8fbfad2d8781594602034b0e3d5df5e0022170c"
 dependencies = [
  "console_error_panic_hook",
  "js-sys",

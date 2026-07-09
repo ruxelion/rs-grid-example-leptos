@@ -88,6 +88,19 @@ fn App() -> impl IntoView {
         });
     });
 
+    // Re-register the badge/button class resolver whenever the theme
+    // changes, so `dept`/`status`/`seniority`/`emp_type`/`badges`
+    // (CellFormat::Styled) repaint with the dark/dimmed colours
+    // instead of staying stuck on light-theme values.
+    Effect::new(move |_| {
+        let theme = theme_memo.get();
+        CANVAS.with(|r| {
+            if let Some(gc) = r.borrow().as_ref() {
+                gc.set_class_resolver(Rc::new(move |raw| resolve_classes(raw, &theme)));
+            }
+        });
+    });
+
     view! {
         <main class="app-layout">
             <div class="app-page-header">
@@ -292,9 +305,12 @@ fn App() -> impl IntoView {
 
                         let on_mount_cb =
                             Box::new(move |gc: WebGridCanvas| {
-                                gc.set_class_resolver(
-                                    Rc::new(resolve_classes),
-                                );
+                                let theme = theme_memo.get_untracked();
+                                gc.set_class_resolver(Rc::new(
+                                    move |raw| {
+                                        resolve_classes(raw, &theme)
+                                    },
+                                ));
                                 gc.set_editable(editable.get_untracked());
                                 gc.set_selectable(
                                     selectable.get_untracked(),

@@ -11,10 +11,10 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-rs-grid-core   = { git = "https://github.com/ruxelion/rs-grid", tag = "rs-grid-leptos-v0.3.3" }
-rs-grid-scene  = { git = "https://github.com/ruxelion/rs-grid", tag = "rs-grid-leptos-v0.3.3" }
-rs-grid-leptos = { git = "https://github.com/ruxelion/rs-grid", tag = "rs-grid-leptos-v0.3.3" }
-example-common = { git = "https://github.com/ruxelion/rs-grid", tag = "rs-grid-leptos-v0.3.3" }
+rs-grid-core   = { git = "https://github.com/ruxelion/rs-grid", tag = "rs-grid-leptos-v0.3.4" }
+rs-grid-scene  = { git = "https://github.com/ruxelion/rs-grid", tag = "rs-grid-leptos-v0.3.4" }
+rs-grid-leptos = { git = "https://github.com/ruxelion/rs-grid", tag = "rs-grid-leptos-v0.3.4" }
+example-common = { git = "https://github.com/ruxelion/rs-grid", tag = "rs-grid-leptos-v0.3.4" }
 leptos = { version = "0.8", features = ["csr"] }
 wasm-bindgen = "0.2"
 js-sys = "0.3"
@@ -67,4 +67,3 @@ features = [
   "Storage",
   "TextMetrics",
 ]
-
