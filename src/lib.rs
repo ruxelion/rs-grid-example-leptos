@@ -7,6 +7,7 @@ use example_common::{
     layout::LayoutSnapshot,
 };
 use leptos::prelude::*;
+use rs_grid_core::commands::GridCommand;
 use rs_grid_leptos::{theme_from_css_vars, GridCanvas, Locale, WebGridCanvas};
 use rs_grid_scene::Theme;
 use wasm_bindgen::prelude::*;
@@ -284,6 +285,11 @@ fn App() -> impl IntoView {
                             snapshot.apply(&mut model);
                         }
 
+                        let actions_col_idx = model
+                            .columns
+                            .iter()
+                            .position(|c| c.key == "actions");
+
                         let on_mount_cb =
                             Box::new(move |gc: WebGridCanvas| {
                                 gc.set_class_resolver(
@@ -296,6 +302,27 @@ fn App() -> impl IntoView {
                                 gc.set_column_reorderable(
                                     column_reorderable.get_untracked(),
                                 );
+                                // Size the buttons column to its content
+                                // right away, instead of requiring the
+                                // user to double-click the separator, then
+                                // add breathing room on top so the button
+                                // group's centering is visible immediately
+                                // (auto-fit alone leaves ~0 slack, which
+                                // makes centered and left-aligned look
+                                // identical).
+                                if let Some(idx) = actions_col_idx {
+                                    gc.auto_fit_column(idx);
+                                    if let Some((_, w)) =
+                                        gc.column_widths().get(idx)
+                                    {
+                                        gc.dispatch(
+                                            GridCommand::ResizeColumn {
+                                                col_idx: idx,
+                                                new_width: w + 60.0,
+                                            },
+                                        );
+                                    }
+                                }
                                 // Persist column layout to localStorage so
                                 // user-resized / reordered columns survive
                                 // a page reload (F5).
